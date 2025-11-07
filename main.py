@@ -33,6 +33,20 @@ class Graph:
         start_vertex = self.vertex_data.index(start_vertex_data)
         self.dfs_util(start_vertex, visited)
 
+    def bfs(self, start_vertex_data):
+        queue = [self.vertex_data.index(start_vertex_data)]
+        visited = [False] * self.size
+        visited[queue[0]] = True
+
+        while queue:
+            current_vertex = queue.pop(0)
+            print(self.vertex_data[current_vertex], end=" ")
+
+            for i in range(self.size):
+                if self.adjacency_matrix[current_vertex][i] is not None and not visited[i]:
+                    queue.append(i)
+                    visited[i]
+
 g = Graph(4)
 g.add_vertex_data(0, 'A')
 g.add_vertex_data(1, 'B')
@@ -46,4 +60,4 @@ g.add_edge(2, 3, 4)
 
 g.print_graph()
 
-g.dfs('C')
+g.bfs('C')
